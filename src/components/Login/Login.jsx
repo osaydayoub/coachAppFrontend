@@ -10,12 +10,11 @@ function Login({ handle }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      console.log("loginloginloginloginlogin");
       setError("");
       setLoading(true);
       const res = await axios.post(
@@ -25,7 +24,10 @@ function Login({ handle }) {
           password,
         }
       );
-      console.log(res);
+      console.log(`${res.data.name} LoggedIn`);
+      console.log(res.data );
+
+      setCurrentUser(res.data)
       setIsLoggedIn(true);
       navigate("/");
     } catch (error) {

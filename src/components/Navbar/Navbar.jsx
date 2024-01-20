@@ -13,6 +13,7 @@ export default function Navbar() {
             <span></span>
         </div>
         <ul className={menuOpen?"open":""}>
+            <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/admin">Admin</NavLink></li>
             <li><NavLink to="/timetable">Training Timetable</NavLink></li>
             <li><NavLink to="/tracking">Tracking</NavLink></li>

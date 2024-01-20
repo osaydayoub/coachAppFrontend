@@ -26,10 +26,30 @@ function App() {
         />
         {/* <Route path='/' exact element={<Homepage />} /> */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/timetable" element={<TimetablePage />} />
-        <Route path="/tracking" element={<TrackingPage />} />
-        <Route path="/meals" element={<MealsPage />} />
+        <Route
+          path="/admin"
+          element={
+            isLoggedIn ? <AdminPage /> : <Navigate replace to={"/login"} />
+          }
+        />
+        <Route
+          path="/timetable"
+          element={
+            isLoggedIn ? <TimetablePage /> : <Navigate replace to={"/login"} />
+          }
+        />
+        <Route
+          path="/tracking"
+          element={
+            isLoggedIn ? <TrackingPage /> : <Navigate replace to={"/login"} />
+          }
+        />
+        <Route
+          path="/meals"
+          element={
+            isLoggedIn ? <MealsPage /> : <Navigate replace to={"/login"} />
+          }
+        />
       </Routes>
     </>
   );

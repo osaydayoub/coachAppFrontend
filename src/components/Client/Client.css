@@ -1,6 +1,16 @@
 .client-container{
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
+    background-color: var(--color2);
+    /* color: white; */
+    border: solid var(--color1) 2px;
+    height: 40px;
     
 
+}
+.more{
+    height: 35px;
+    width: 35px;
 }

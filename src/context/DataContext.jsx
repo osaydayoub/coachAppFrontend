@@ -8,7 +8,7 @@ export function useData() {
 }
 
 export function DataProvider({ children }) {
-  const [clients, setClients] = useState(null);
+  const [clientsData, setClientsData] = useState(null);
   const [workoutsData, setWorkoutsData] = useState(null);
   const getWorkouts = async () => {
     try {
@@ -21,10 +21,22 @@ export function DataProvider({ children }) {
       console.log("error in get workouts");
     }
   };
+  const getClients = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_LINK}/coach/clients`
+      );
+      setClientsData(response.data);
+
+    } catch (error) {
+      console.log("error in get Clients");
+    }
+  };
 
   const value = {
-    clients,
-    setClients,
+    clientsData,
+    setClientsData,
+    getClients,
     workoutsData,
     setWorkoutsData,
     getWorkouts,

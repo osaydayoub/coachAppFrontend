@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./TimetablePage.css";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useData } from "../../context/DataContext.jsx";
 import {
   getFullDate,
   dateIsWithinSevenDays,
@@ -12,6 +13,7 @@ import Workout from "../../components/Workout/Workout.jsx";
 function TimetablePage() {
   const [value, onchange] = useState(new Date());
   const { currentUser } = useAuth();
+  const { workoutsData, setWorkoutsData, getWorkouts } = useData();
   //may be no ned for that
   const [workouts, setWorkouts] = useState(null);
   // const [workoutsForOneDay, setWorkoutsForOneDay] = useState(null);
@@ -21,7 +23,6 @@ function TimetablePage() {
   useEffect(() => {
     if (!currentUser.isAdmin) {
       const currentUserWorkouts = currentUser.client.workouts;
-
       const highlightArray = [];
       currentUserWorkouts.forEach((element) => {
         highlightArray.push(new Date(element.date));
@@ -34,11 +35,19 @@ function TimetablePage() {
       // setWorkoutWithinSevenDays(res);
       setWorkoutsToDisply(res);
     } else {
-      // const res = currentUserWorkouts.filter((workout) => {
-      //   return dateIsWithinSevenDays(workout.date);
-      // });
+      getWorkouts();
     }
   }, []);
+
+  useEffect(() => {
+    if (workoutsData != null) {
+      const workoutsForToday = workoutsData?.filter((workout) => {
+        return isSameDay(new Date(workout.date), new Date(value));
+      });
+      setWorkoutsToDisply(workoutsForToday);
+      console.log(workoutsForToday);
+    }
+  }, [workoutsData, value]);
 
   const tileContent = ({ date, view }) => {
     if (view === "month") {
@@ -60,8 +69,14 @@ function TimetablePage() {
     <div className="TimetablePage page">
       <div className="workouts-container">
         {!currentUser.isAdmin && <h3>Workouts in the upcoming 7 days</h3>}
-        {currentUser.isAdmin && <h3>Today's Workouts</h3>}
-        {!currentUser.isAdmin && workouts && (
+        {currentUser.isAdmin && (
+          <h3>
+            {isSameDay(new Date(value), new Date())
+              ? `Today's Workouts`
+              : `Workouts For ${getFullDate(value)}`}
+          </h3>
+        )}
+        {workoutsToDisply && (
           <>
             {workoutsToDisply.map((workout, index) => {
               return (
@@ -75,16 +90,11 @@ function TimetablePage() {
             })}
           </>
         )}
-        
       </div>
 
-      {!currentUser.isAdmin && (
-        <div className="calendar-message-container">
-          <Calendar
-            value={value}
-            onChange={onchange}
-            tileContent={tileContent}
-          />
+      <div className="calendar-message-container">
+        <Calendar value={value} onChange={onchange} tileContent={tileContent} />
+        {!currentUser.isAdmin && workouts && (
           <div className="message-container">
             <h3>{getFullDate(value)}</h3>
             {getWorkout(new Date(value)) && (
@@ -95,8 +105,8 @@ function TimetablePage() {
               />
             )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

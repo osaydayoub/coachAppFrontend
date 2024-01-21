@@ -2,3 +2,17 @@
     gap: 100px;
     flex-direction: row;
 }
+
+/* Add a marker to highlight specific dates */
+.highlighted-date {
+    background-color: var(--color2);
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin: 2px;
+  }
+  .workouts-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }

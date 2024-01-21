@@ -1,0 +1,16 @@
+.workout-container{
+    
+    display: flex;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.workout-1{
+    background-color: var(--color2);
+    color: black;
+}
+
+.workout-2{
+    background-color: var(--color1);
+    color: white;
+}

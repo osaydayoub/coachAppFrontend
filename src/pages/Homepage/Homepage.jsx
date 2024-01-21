@@ -4,7 +4,7 @@ function Homepage() {
   const { currentUser, isLoggedIn } = useAuth();
   return (
     <div className="page">
-      <h1>{`Hello ${currentUser.name}`}</h1>
+      <h1>{`Hello ${currentUser.name} !`}</h1>
     </div>
   );
 }

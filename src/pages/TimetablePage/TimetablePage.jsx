@@ -3,13 +3,18 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./TimetablePage.css";
 import { useAuth } from "../../context/AuthContext.jsx";
-import { getFullDate, getTime ,isSameDay} from "../../utils/helpers.js";
+import {
+  getFullDate,
+  dateIsWithinSevenDays,
+  isSameDay,
+} from "../../utils/helpers.js";
 import Workout from "../../components/Workout/Workout.jsx";
 function TimetablePage() {
   const [value, onchange] = useState(new Date());
   const { currentUser, isLoggedIn } = useAuth();
   const [workouts, setWorkouts] = useState(null);
   const [highlightedDates, setHighlightedDates] = useState(null);
+  const [workoutWithinSevenDays, setWorkoutWithinSevenDays] = useState(null);
   useEffect(() => {
     if (!currentUser.isAdmin) {
       //TODO get all work outs in week form a given date
@@ -21,15 +26,22 @@ function TimetablePage() {
       });
       console.log(highlightArray);
       setHighlightedDates(highlightArray);
-      setWorkouts(currentUser.client.workouts);
+      const currentUserWorkouts = currentUser.client.workouts;
+      setWorkouts(currentUserWorkouts);
+
+      const res = currentUserWorkouts.filter((workout) => {
+        return dateIsWithinSevenDays(workout.date);
+      });
+      console.log(res);
+
+      setWorkoutWithinSevenDays(res);
     } else {
     }
   }, []);
 
   const tileContent = ({ date, view }) => {
-    if (view === 'month') {
+    if (view === "month") {
       const isHighlighted = highlightedDates?.some((highlightedDate) =>
-      
         isSameDay(date, highlightedDate)
       );
 
@@ -43,9 +55,14 @@ function TimetablePage() {
         {!currentUser.isAdmin && <h3>Workouts in the upcoming 7 days</h3>}
         {!currentUser.isAdmin && workouts && (
           <>
-            {workouts.map((workout, index) => {
+            {workoutWithinSevenDays.map((workout, index) => {
               return (
-                <Workout key={index} workout={workout} isAdmin={currentUser.isAdmin} index={index}/>
+                <Workout
+                  key={index}
+                  workout={workout}
+                  isAdmin={currentUser.isAdmin}
+                  index={index}
+                />
               );
             })}
           </>
@@ -54,7 +71,7 @@ function TimetablePage() {
       </div>
 
       <div className="calendar-message-container">
-        <Calendar value={value} onChange={onchange} tileContent={tileContent}/>
+        <Calendar value={value} onChange={onchange} tileContent={tileContent} />
         <div className="message-container">
           {/*To do find the workout in date=value*/}
           <h3>{getFullDate(value)}</h3>

@@ -27,4 +27,25 @@ export const isSameDay = (date1, date2) =>
 //     return `${m}-${day}`;
 //   };
 
+export function dateIsWithinSevenDays(date) {
+  // Get the current date
+  let currentDate = new Date();
+  // console.log(currentDate);
+
+  // Calculate the date 7 days from now
+  let sevenDaysLater = new Date(currentDate);
+  sevenDaysLater.setDate(currentDate.getDate() + 7);
+
+  // Clone the original date to avoid modifying it directly
+  let newDate = new Date(date);
+  // console.log(newDate);
+  // console.log(newDate >= currentDate);
+  // console.log(newDate <= sevenDaysLater);
+  // console.log((newDate >= currentDate) && (newDate <= sevenDaysLater));
+
+
+  // Return true if the new date is within the next 7 days
+  return (newDate >= currentDate) && (newDate <= sevenDaysLater);
+}
+
 

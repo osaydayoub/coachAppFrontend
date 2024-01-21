@@ -14,11 +14,9 @@ function TimetablePage() {
   const [value, onchange] = useState(new Date());
   const { currentUser } = useAuth();
   const { workoutsData, setWorkoutsData, getWorkouts } = useData();
-  //may be no ned for that
+  //maybe no need for that
   const [workouts, setWorkouts] = useState(null);
-  // const [workoutsForOneDay, setWorkoutsForOneDay] = useState(null);
   const [highlightedDates, setHighlightedDates] = useState(null);
-  // const [workoutWithinSevenDays, setWorkoutWithinSevenDays] = useState(null);
   const [workoutsToDisply, setWorkoutsToDisply] = useState(null);
   useEffect(() => {
     if (!currentUser.isAdmin) {
@@ -35,7 +33,9 @@ function TimetablePage() {
       // setWorkoutWithinSevenDays(res);
       setWorkoutsToDisply(res);
     } else {
-      getWorkouts();
+      if (workoutsData === null) {
+        getWorkouts();
+      }
     }
   }, []);
 

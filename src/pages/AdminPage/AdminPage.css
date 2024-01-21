@@ -1,0 +1,12 @@
+.AdminPage{
+    padding: 40px;
+    justify-content: start;
+    gap: 15px;
+}
+.search-box{
+    height: 50px;
+    width: 50%;
+    border: solid 3px var(--color2);
+    border-radius: 15px;
+    font-size: large;
+}

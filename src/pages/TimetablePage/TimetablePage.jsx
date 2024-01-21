@@ -11,31 +11,32 @@ import {
 import Workout from "../../components/Workout/Workout.jsx";
 function TimetablePage() {
   const [value, onchange] = useState(new Date());
-  const { currentUser, isLoggedIn } = useAuth();
+  const { currentUser } = useAuth();
+  //may be no ned for that
   const [workouts, setWorkouts] = useState(null);
+  // const [workoutsForOneDay, setWorkoutsForOneDay] = useState(null);
   const [highlightedDates, setHighlightedDates] = useState(null);
-  const [workoutWithinSevenDays, setWorkoutWithinSevenDays] = useState(null);
+  // const [workoutWithinSevenDays, setWorkoutWithinSevenDays] = useState(null);
+  const [workoutsToDisply, setWorkoutsToDisply] = useState(null);
   useEffect(() => {
     if (!currentUser.isAdmin) {
-      //TODO get all work outs in week form a given date
-      //for now i will get all of them !
-      const array = currentUser.client.workouts;
+      const currentUserWorkouts = currentUser.client.workouts;
+
       const highlightArray = [];
-      array.forEach((element) => {
+      currentUserWorkouts.forEach((element) => {
         highlightArray.push(new Date(element.date));
       });
-      console.log(highlightArray);
-      setHighlightedDates(highlightArray);
-      const currentUserWorkouts = currentUser.client.workouts;
-      setWorkouts(currentUserWorkouts);
-
       const res = currentUserWorkouts.filter((workout) => {
         return dateIsWithinSevenDays(workout.date);
       });
-      console.log(res);
-
-      setWorkoutWithinSevenDays(res);
+      setWorkouts(currentUserWorkouts);
+      setHighlightedDates(highlightArray);
+      // setWorkoutWithinSevenDays(res);
+      setWorkoutsToDisply(res);
     } else {
+      // const res = currentUserWorkouts.filter((workout) => {
+      //   return dateIsWithinSevenDays(workout.date);
+      // });
     }
   }, []);
 
@@ -44,18 +45,25 @@ function TimetablePage() {
       const isHighlighted = highlightedDates?.some((highlightedDate) =>
         isSameDay(date, highlightedDate)
       );
-
       return isHighlighted ? <div className="highlighted-date"></div> : null;
     }
+  };
+
+  const getWorkout = (date) => {
+    const res = workouts?.find((workout) => {
+      return isSameDay(new Date(date), new Date(workout.date));
+    });
+    return res;
   };
 
   return (
     <div className="TimetablePage page">
       <div className="workouts-container">
         {!currentUser.isAdmin && <h3>Workouts in the upcoming 7 days</h3>}
+        {currentUser.isAdmin && <h3>Today's Workouts</h3>}
         {!currentUser.isAdmin && workouts && (
           <>
-            {workoutWithinSevenDays.map((workout, index) => {
+            {workoutsToDisply.map((workout, index) => {
               return (
                 <Workout
                   key={index}
@@ -67,16 +75,28 @@ function TimetablePage() {
             })}
           </>
         )}
-        {currentUser.isAdmin && <h3>Today's Workouts</h3>}
+        
       </div>
 
-      <div className="calendar-message-container">
-        <Calendar value={value} onChange={onchange} tileContent={tileContent} />
-        <div className="message-container">
-          {/*To do find the workout in date=value*/}
-          <h3>{getFullDate(value)}</h3>
+      {!currentUser.isAdmin && (
+        <div className="calendar-message-container">
+          <Calendar
+            value={value}
+            onChange={onchange}
+            tileContent={tileContent}
+          />
+          <div className="message-container">
+            <h3>{getFullDate(value)}</h3>
+            {getWorkout(new Date(value)) && (
+              <Workout
+                workout={getWorkout(new Date(value))}
+                isAdmin={currentUser.isAdmin}
+                index={1}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

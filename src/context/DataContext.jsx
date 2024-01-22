@@ -49,6 +49,25 @@ export function DataProvider({ children }) {
     }
   };
 
+  const createWorkout = async (workout) => {
+    // console.log("createWorkout");
+    try {
+      console.log(workout);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_LINK}/coach/workouts`,
+        {
+          exercise: workout.exercise,
+          date: workout.date,
+          clientID: workout.clientID,
+        }
+      );
+      // console.log(response.data);
+      await getWorkouts();
+    } catch (error) {
+      console.log("error in createWorkout");
+    }
+  };
+
   const value = {
     clientsData,
     setClientsData,
@@ -57,6 +76,13 @@ export function DataProvider({ children }) {
     setWorkoutsData,
     getWorkouts,
     addPackage,
+    createWorkout,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
+
+// {
+//   exercise: workout.exercise,
+//   date: workout.date,
+//   clientID: workout.clientID,
+// }

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataContext.jsx";
-function AddPackage({client}) {
+function AddPackage({ client }) {
   const [workoutsNumber, setWorkoutsNumber] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [paidAmount, setPaidAmount] = useState(0);
   const [caloricIntake, setCaloricIntake] = useState(0);
+  //TODO done
   const [adding, setAdding] = useState(false);
   const { addPackage } = useData();
 
   const handleAddPackage = async (e) => {
     e.preventDefault();
     try {
+      setAdding(true);
       await addPackage(client._id, {
         numberOfWorkouts: workoutsNumber,
         totalCost: totalCost,
@@ -19,8 +21,9 @@ function AddPackage({client}) {
       });
     } catch (error) {}
     console.log("handleAddPackage");
-    // setAdding(false);
+    setAdding(false);
   };
+
   return (
     <div className="addPackage-container">
       <h3>Add a Package</h3>

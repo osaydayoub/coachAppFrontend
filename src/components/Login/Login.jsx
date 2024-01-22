@@ -24,8 +24,8 @@ function Login({ handle }) {
           password,
         }
       );
-      console.log(`${res.data.name} LoggedIn`);
-      console.log(res.data );
+      // console.log(`${res.data.name} LoggedIn`);
+      // console.log(res.data );
 
       setCurrentUser(res.data)
       setIsLoggedIn(true);

@@ -6,6 +6,7 @@
     gap: 15px;
     background-color: var(--color2);
     border: solid var(--color1) 2px;
+    border-radius: 10px;
     
 
 }

@@ -16,7 +16,6 @@ export function DataProvider({ children }) {
         `${import.meta.env.VITE_API_LINK}/coach/workouts`
       );
       setWorkoutsData(response.data);
-
     } catch (error) {
       console.log("error in get workouts");
     }
@@ -27,9 +26,26 @@ export function DataProvider({ children }) {
         `${import.meta.env.VITE_API_LINK}/coach/clients`
       );
       setClientsData(response.data);
-
     } catch (error) {
       console.log("error in get Clients");
+    }
+  };
+
+  const addPackage = async (id, packageObj) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_LINK}/coach/clients/assignPackage/${id}`,
+        {
+          numberOfWorkouts: packageObj.numberOfWorkouts,
+          totalCost: packageObj.totalCost,
+          paidAmount: packageObj.paidAmount,
+          caloricIntake: packageObj.caloricIntake,
+        }
+      );
+      console.log(response.data);
+      await getClients();
+    } catch (error) {
+      console.log("error in addPackage");
     }
   };
 
@@ -40,6 +56,7 @@ export function DataProvider({ children }) {
     workoutsData,
     setWorkoutsData,
     getWorkouts,
+    addPackage,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

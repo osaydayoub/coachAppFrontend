@@ -45,7 +45,7 @@ function TimetablePage() {
         return isSameDay(new Date(workout.date), new Date(value));
       });
       setWorkoutsToDisply(workoutsForToday);
-      console.log(workoutsForToday);
+      // console.log(workoutsForToday);
     }
   }, [workoutsData, value]);
 

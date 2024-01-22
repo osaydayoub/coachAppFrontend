@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminPage.css";
 import { useAuth } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext.jsx";
@@ -7,22 +7,36 @@ import Client from "../../components/Client/Client";
 
 function AdminPage() {
   const { clientsData, setClientsData, getClients } = useData();
+  const [clientsToDisply, setClientsToDisply] = useState(null);
   useEffect(() => {
     if (clientsData === null) {
       getClients();
     }
   }, []);
+
+  useEffect(() => {
+    if (clientsData != null) {
+      setClientsToDisply(clientsData);
+    }
+  }, [clientsData]);
+  const handelSearchChange = (e) => {
+    const filteredClients = clientsData.filter((client) => {
+      return client.name.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+    setClientsToDisply(filteredClients);
+  };
   return (
     <div className="AdminPage page">
       <input
         className="search-box"
         type="text"
         placeholder="Search by Client Name ..."
+        onChange={handelSearchChange}
       />
-      {clientsData && (
-        <div className="clients-container">
-          {clientsData.map((client,index)=>{
-            return(<Client key={index} client={client} index={index}/>)
+      {clientsToDisply && (
+        <div className="clients-list">
+          {clientsToDisply.map((client, index) => {
+            return <Client key={index} client={client} index={index} />;
           })}
         </div>
       )}

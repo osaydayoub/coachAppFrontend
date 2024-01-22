@@ -2,29 +2,10 @@ import React, { useState } from "react";
 import "./Client.css";
 import { MdOutlineExpandMore, MdExpandLess } from "react-icons/md";
 import { getFullDate } from "../../utils/helpers.js";
-import { useData } from "../../context/DataContext.jsx";
+import AddPackage from "../AddPackage/AddPackage.jsx";
+
 function Client({ client, index }) {
   const [moreInfo, setMoreInfo] = useState(false);
-  const [workoutsNumber, setWorkoutsNumber] = useState(0);
-  const [totalCost, setTotalCost] = useState(0);
-  const [paidAmount, setPaidAmount] = useState(0);
-  const [caloricIntake, setCaloricIntake] = useState(0);
-
-  const [adding, setAdding] = useState(false);
-  const { addPackage } = useData();
-
-  const handleAddPackage = async (e) => {
-    e.preventDefault();
-    try {
-      await addPackage(client._id, {
-        numberOfWorkouts: workoutsNumber,
-        totalCost: totalCost,
-        paidAmount: paidAmount,
-        caloricIntake: caloricIntake,
-      });
-    } catch (error) {}
-    console.log("handleAddPackage");
-  };
 
   return (
     <div className="client-container">
@@ -54,60 +35,7 @@ function Client({ client, index }) {
         </div>
       )}
       {/* //Add a Package--------------------------------------------------------------------------------------- */}
-
-      <div className="addPackage-container">
-        <h3>Add a Package</h3>
-        <form onSubmit={(e) => handleAddPackage(e)}>
-          <div>
-            <label htmlFor="workouts-number">Workouts Number</label>
-            <br />
-            <input
-              type="number"
-              id="workouts-number"
-              onChange={(e) => setWorkoutsNumber(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="total-cost">Total Cost</label>
-            <br />
-            <input
-              type="number"
-              id="total-cost"
-              onChange={(e) => setTotalCost(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="paid-amount">Paid Amount</label>
-            <br />
-            <input
-              type="number"
-              id="paid-amount"
-              onChange={(e) => setPaidAmount(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="caloric-intake">Caloric Intake</label>
-            <br />
-            <input
-              type="number"
-              id="caloric-intake"
-              onChange={(e) => setCaloricIntake(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            {/* disabled={adding} TODO implement the change*/}
-            <button type="submit" disabled={adding}>
-              Add
-            </button>
-          </div>
-        </form>
-      </div>
+      <AddPackage client={client} />
 
       {/* //Add a Package--------------------------------------------------------------------------------------- */}
     </div>

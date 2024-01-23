@@ -1,0 +1,13 @@
+.daily-message-container{
+    width: 50%;
+}
+.TrackingPage{
+    gap: 10px;
+    /* justify-content:start; */
+}
+.add-track-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}

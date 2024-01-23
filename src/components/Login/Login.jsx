@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../../pages/LoginPage/LoginPage.css";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
@@ -27,7 +27,7 @@ function Login({ handle }) {
       );
       // console.log(`${res.data.name} LoggedIn`);
 
-      console.log(res.data );
+      console.log(res.data);
 
       setCurrentUser(res.data);
       setIsLoggedIn(true);
@@ -73,7 +73,7 @@ function Login({ handle }) {
       </form>
 
       <div>
-        Need an account?<Link onClick={handle}>Sign Up</Link>{" "}
+        Need an account?<Link onClick={handle}>Sign Up</Link>
       </div>
     </div>
   );

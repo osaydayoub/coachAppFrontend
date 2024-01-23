@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './LoginPage.css'
 import Login from '../../components/Login/Login';
+import SignUp from '../../components/SignUp/SignUp';
 
 
 function LoginPage() {
@@ -17,6 +18,7 @@ function LoginPage() {
   return (
     <div className='LoginPage'>
       {selectedComponent === login && <Login handle={handleComponentChange} />}
+      {selectedComponent === signUp && <SignUp handle={handleComponentChange} />}
     </div>
   )
 }

@@ -1,0 +1,14 @@
+.change-box{
+    width: 20%;
+    border: solid var(--color1) 2px; 
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.change-box button {
+    height: 30px;
+    width: 30px;
+    border-radius: 10px;
+}

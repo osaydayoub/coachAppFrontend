@@ -2,7 +2,12 @@ import React from "react";
 import "./MealsPage.css";
 import MealCard from "../../components/MealCard/MealCard";
 function MealsPage() {
-  const mealsData = ["Breakfast", "Lunch", "Snack", "Dinner"];
+  const mealsData = [
+    { name: "Breakfast", img: "1.jpg" },
+    { name: "Lunch", img: "2.jpg" },
+    { name: "Snack", img: "3.jpg" },
+    { name: "Dinner", img: "4.jpg" },
+  ];
   return (
     <div className="MealsPage page">
       <div className="meals-container">

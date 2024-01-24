@@ -9,16 +9,28 @@ function DailyTracking() {
   const [waterAmount, setWaterAmount] = useState(0);
   const [sleepHours, setSleepHours] = useState(0);
   const [dailyTracking, setDailyTracking] = useState(null);
-  const { currentClient, addDailyTracking,getCurrentClient } = useData();
+  const { currentClient, addDailyTracking, getCurrentClient } = useData();
   // const [client, setClient] = useState(currentClient);
 
   //for style use!
   const [addCalories, setAddCalories] = useState(false);
+  const [addWaterAmount, setAddWaterAmount] = useState(false);
+  const [addSleepHours, setAddSleepHours] = useState(false);
 
   useState(() => {
-    const track = currentClient.dailyTracking.find((track) => {
+    let track = currentClient.dailyTracking.find((track) => {
       return isSameDay(new Date(track.date), new Date());
     });
+    if (track === undefined) {
+      console.log("stil no data");
+      const t = {
+        date: new Date(),
+        calories: 0,
+        waterAmount: 0,
+        sleepHours: 0,
+      };
+      track = t;
+    }
     setDailyTracking(track);
   }, []);
 
@@ -46,25 +58,20 @@ function DailyTracking() {
         waterAmount: Number(dailyTracking.waterAmount) + Number(waterAmount),
         sleepHours: Number(dailyTracking.sleepHours) + Number(sleepHours),
       };
-      // console.log(typeof calories);
-      // console.log(newTrack);
-      // console.log(updatednewTrack);
-      // console.log(currentClient);
       await addDailyTracking(currentClient._id, updatednewTrack);
-      const resTrack=await getCurrentClient(currentClient._id);
+      const resTrack = await getCurrentClient(currentClient._id);
       const track = resTrack.dailyTracking.find((track) => {
         return isSameDay(new Date(track.date), new Date());
       });
       setDailyTracking(track);
-      // console.log(resTrack);
     } catch (error) {
       console.log(error);
       console.log("error in handleDailyTracking");
     }
     setAdding(false);
-    // console.log(currentClient);
-    // setClient(currentClient);
-
+    // setCalories(0);
+    // setSleepHours(0);
+    // setWaterAmount(0);
   };
 
   return (
@@ -88,26 +95,30 @@ function DailyTracking() {
 
           <div className="change-box">
             <p>{`Water Amount: ${dailyTracking.waterAmount}`}</p>
-            <button>+</button>
-            <input
-              type="number"
-              id="water-input"
-              value={waterAmount}
-              onChange={(e) => setWaterAmount(e.target.value)}
-              required
-            />
+            <button onClick={() => setAddWaterAmount(true)}>+</button>
+            {addWaterAmount && (
+              <input
+                type="number"
+                id="water-input"
+                value={waterAmount}
+                onChange={(e) => setWaterAmount(e.target.value)}
+                required
+              />
+            )}
           </div>
 
           <div className="change-box">
             <p>{`Sleep Hours: ${dailyTracking.sleepHours}`}</p>
-            <button>+</button>
-            <input
-              type="number"
-              id="sleep-hours"
-              value={sleepHours}
-              onChange={(e) => setSleepHours(e.target.value)}
-              required
-            />
+            <button onClick={() => setAddSleepHours(true)}>+</button>
+            {addSleepHours && (
+              <input
+                type="number"
+                id="sleep-hours"
+                value={sleepHours}
+                onChange={(e) => setSleepHours(e.target.value)}
+                required
+              />
+            )}
           </div>
           <button onClick={handleUpdateDailyTracking} disabled={adding}>
             Update

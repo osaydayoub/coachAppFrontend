@@ -10,9 +10,15 @@
   width: 100%;
   min-height: 100vh;
 }
-:root {
+/* :root {
   --color1: #2B2E4A;
   --color2: #E84545;
+  --color3: #903749;
+  --color4: #53354A;
+} */
+:root {
+  --color1: #222831;
+  --color2: #00ADB5;
   --color3: #903749;
   --color4: #53354A;
 }

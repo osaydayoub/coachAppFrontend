@@ -24,3 +24,14 @@
     /* justify-content: center; */
     align-items: center;
   }
+
+  @media (max-width:820px) {
+
+    .TimetablePage{
+      padding: 20px;
+      gap: 100px;
+      flex-direction: column;
+  }
+
+    
+}

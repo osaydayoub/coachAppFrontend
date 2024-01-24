@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataContext.jsx";
+import "./AddPackage.css";
 function AddPackage({ client ,packageDisplay}) {
   const [workoutsNumber, setWorkoutsNumber] = useState(0);
   const [totalCost, setTotalCost] = useState(0);

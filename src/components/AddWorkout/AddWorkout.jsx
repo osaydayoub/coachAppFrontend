@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataContext.jsx";
+import "./AddWorkout.css"
 function AddWorkout({ client,workoutDisplay }) {
   const exerciseOptions = [
     { value: "Push", label: "Push" },

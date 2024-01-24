@@ -120,53 +120,15 @@ function DailyTracking() {
               />
             )}
           </div>
-          <button onClick={handleUpdateDailyTracking} disabled={adding}>
+          <button className="update-btn" onClick={handleUpdateDailyTracking} disabled={adding}>
             Update
           </button>
         </div>
       )}
-
-      {/* <div>
-        <label htmlFor="calories">{`Calories: `}</label>
-        <input
-          type="number"
-          id="calories"
-          value={calories}
-          onChange={(e) => setCalories(e.target.value)}
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="water-amount">{`Water Amount: `}</label>
-        <input
-          type="number"
-          id="water-amount"
-          onChange={(e) => setWaterAmount(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="sleep-hours">{`Sleep Hours: `}</label>
-        <input
-          type="number"
-          id="sleep-hours"
-          onChange={(e) => setSleepHours(e.target.value)}
-          required
-        />
-      </div>
-
-      <div>
-        {/* disabled={adding} TODO implement the change*/}
     </div>
   );
 }
 
 export default DailyTracking;
 
-// {
-//   "date":"2024-01-23",
-//   "calories":15,
-//   "waterAmount":2.5,
-//   "sleepHours":7
-//   }
+

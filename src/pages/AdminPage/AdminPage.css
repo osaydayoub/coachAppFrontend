@@ -16,7 +16,11 @@
     gap: 10px;
 }
 
-
+@media (max-width:820px) {
+    .search-box{
+        width: 80%;
+    }
+}
 /* .search-box{
     height: 50px;
     width: 50%;

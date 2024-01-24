@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
-import { GiWeightLiftingUp } from "react-icons/gi";
+// import { GiWeightLiftingUp } from "react-icons/gi";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useData } from "../../context/DataContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
+import logo from "../../assets/images/logo.jpeg";
 export default function Navbar() {
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuth();
   const { setClientsData, setWorkoutsData, setCurrentClient } = useData();
@@ -27,10 +28,7 @@ export default function Navbar() {
   return (
     <nav>
       <Link to="/" className="title">
-        <h1>
-          <GiWeightLiftingUp />
-          M.S.A
-        </h1>{" "}
+        <img className="logo-img" src={logo} alt="img" />
       </Link>
       <div
         className="menu"
@@ -54,9 +52,11 @@ export default function Navbar() {
         <li>
           <NavLink to="/timetable">Training Timetable</NavLink>
         </li>
-        <li>
-          <NavLink to="/tracking">Tracking</NavLink>
-        </li>
+        {!currentUser.isAdmin && (
+          <li>
+            <NavLink to="/tracking">Tracking</NavLink>
+          </li>
+        )}
         <li>
           <NavLink to="/meals">Meals</NavLink>
         </li>

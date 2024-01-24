@@ -3,6 +3,7 @@
 }
 nav{
     padding: 20px;
+    padding-left: 0px;
     height: 70px;
     width: 100%;
     display: flex;
@@ -67,7 +68,15 @@ nav .menu span{
     background-color: white;
     border-radius: 0.2rem;
 }
-@media (max-width:650px) {
+
+.logo-img{
+    width: 170px;
+    height: 55px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border: solid var(--color2) 2px; */
+}
+@media (max-width:820px) {
     nav .menu{
         display: flex;
     }

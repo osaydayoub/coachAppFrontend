@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataContext.jsx";
-function AddPackage({ client }) {
+function AddPackage({ client ,packageDisplay}) {
   const [workoutsNumber, setWorkoutsNumber] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [paidAmount, setPaidAmount] = useState(0);
@@ -26,6 +26,7 @@ function AddPackage({ client }) {
 
   return (
     <div className="addPackage-container">
+      <button onClick={()=>packageDisplay(false)}>X</button>
       <h3>Add a Package</h3>
       <form onSubmit={(e) => handleAddPackage(e)}>
         <div>

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
 export default function Navbar() {
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuth();
-  const { setClientsData, setWorkoutsData } = useData();
+  const { setClientsData, setWorkoutsData, setCurrentClient } = useData();
   const [menuOpen, setmenuOpen] = useState(false);
   const navigate = useNavigate();
   async function handleLogout() {
@@ -18,6 +18,7 @@ export default function Navbar() {
       setIsLoggedIn(false);
       setClientsData(null);
       setWorkoutsData(null);
+      setCurrentClient(null);
       navigate("./login");
     } catch {
       console.log("failed to log out");

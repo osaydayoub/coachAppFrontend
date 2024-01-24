@@ -1,8 +1,14 @@
 .workout-container{
-    
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
     border-radius: 5px;
+    height: 40px;
+}
+
+.workout-btn:hover{
+    cursor: pointer;
 }
 
 .workout-1{

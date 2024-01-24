@@ -10,6 +10,7 @@ export function useData() {
 export function DataProvider({ children }) {
   const [clientsData, setClientsData] = useState(null);
   const [workoutsData, setWorkoutsData] = useState(null);
+  const [currentClient, setCurrentClient] = useState(null);
   const getWorkouts = async () => {
     try {
       const response = await axios.get(
@@ -42,10 +43,24 @@ export function DataProvider({ children }) {
           caloricIntake: packageObj.caloricIntake,
         }
       );
-      console.log(response.data);
+      //console.log(response.data);
       await getClients();
     } catch (error) {
       console.log("error in addPackage");
+    }
+  };
+
+  const getCurrentClient = async (id) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_LINK}/coach/clients/${id}`
+      );
+      setCurrentClient(response.data);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      // throw new Error(error.)
     }
   };
 
@@ -68,7 +83,28 @@ export function DataProvider({ children }) {
     }
   };
 
+  const addDailyTracking = async (id, trackingObj) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_LINK}/coach/clients/dailyTracking/${id}`,
+        {
+          date: trackingObj.date,
+          calories: trackingObj.calories,
+          waterAmount: trackingObj.waterAmount,
+          sleepHours: trackingObj.sleepHours,
+        }
+      );
+      console.log(response.data);
+      // await getCurrentClient(id);
+    } catch (error) {
+      console.log("error in addPackage");
+    }
+  };
+
   const value = {
+    currentClient,
+    setCurrentClient,
+    getCurrentClient,
     clientsData,
     setClientsData,
     getClients,
@@ -77,6 +113,7 @@ export function DataProvider({ children }) {
     getWorkouts,
     addPackage,
     createWorkout,
+    addDailyTracking,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

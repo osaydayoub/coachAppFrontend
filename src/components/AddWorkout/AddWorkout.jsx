@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../../context/DataContext.jsx";
-function AddWorkout({ client }) {
+function AddWorkout({ client,workoutDisplay }) {
   const exerciseOptions = [
     { value: "Push", label: "Push" },
     { value: "Pull", label: "Pull" },
@@ -32,6 +32,7 @@ function AddWorkout({ client }) {
   };
   return (
     <div className="addWorkout-container">
+      <button onClick={()=>workoutDisplay(false)}>X</button>
       <h3>Add a Workout</h3>
       <form onSubmit={(e) => handleCreateWorkout(e)}>
         <div>

@@ -1,0 +1,23 @@
+.card-container {
+    width: 280px;
+    padding: 10px;
+    text-align: center;
+    border: solid 3px var(--color1);
+    transition: all 0.25s linear;
+    border-radius: 15px;
+
+
+}
+
+.card-container:hover {
+    transform: scale(1.1);
+    border: none;
+    background-color: var(--color2);
+    color: white;
+}
+
+.card-img {
+    width: 200px;
+    height: 200px;
+    border: solid white 2px;
+}

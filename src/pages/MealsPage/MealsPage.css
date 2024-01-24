@@ -1,0 +1,17 @@
+.MealsPage{
+    padding-top: 30px;
+    gap: 100px;
+    justify-content: start;
+}
+.meals-container{
+    padding: 20px;
+}
+.cards-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: calc(30px);
+}

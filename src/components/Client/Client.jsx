@@ -28,6 +28,11 @@ function Client({ client, index }) {
             <MdOutlineExpandMore />
           </button>
         )}
+        {moreInfo && (
+          <button onClick={() => setMoreInfo(false)}>
+            <MdExpandLess />
+          </button>
+        )}
       </div>
       {moreInfo && (
         <div className="more-data">
@@ -36,16 +41,16 @@ function Client({ client, index }) {
           <div>{`Workouts Number: ${client.numberOfWorkouts}`}</div>
           <div>{`Total Cost: ${client.totalCost}`}</div>
           <div>{`Paid Amount: ${client.paidAmount}`}</div>
-          <button onClick={() => setMoreInfo(false)}>
+          {/* <button onClick={() => setMoreInfo(false)}>
             <MdExpandLess />
-          </button>
+          </button> */}
         </div>
       )}
       <div className="add-container">
         {/* //Add a Package--------------------------------------------------------------------------------------- */}
-        {addPackageDisplay && <AddPackage client={client} />}
+        {addPackageDisplay && <AddPackage client={client} packageDisplay={setAddPackageDisplay} />}
         {/* //Add a Workout--------------------------------------------------------------------------------------- */}
-        {addWorkoutDisplay && <AddWorkout client={client} />}
+        {addWorkoutDisplay && <AddWorkout client={client} workoutDisplay={setAddWorkoutDisplay} />}
       </div>
     </div>
   );

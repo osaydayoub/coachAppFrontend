@@ -3,6 +3,7 @@ import "./AdminPage.css";
 import { useAuth } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext.jsx";
 import Client from "../../components/Client/Client";
+import { FaSearch } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 
 function AdminPage() {
@@ -27,12 +28,14 @@ function AdminPage() {
   };
   return (
     <div className="AdminPage page">
+      {/* <div className="search-box"> */}
       <input
         className="search-box"
         type="text"
         placeholder="Search by Client Name ..."
         onChange={handelSearchChange}
       />
+       {/* <FaSearch /> </div> */}
       {clientsToDisply && (
         <div className="clients-list">
           {clientsToDisply.map((client, index) => {

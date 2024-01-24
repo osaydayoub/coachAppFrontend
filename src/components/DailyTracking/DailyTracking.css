@@ -1,5 +1,16 @@
+.change-container{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 25%;
+    /* border: saddlebrown solid 2px; */
+
+}
 .change-box{
-    width: 20%;
+    width: 100%;
     border: solid var(--color1) 2px; 
     display: flex;
     gap: 20px;
@@ -11,4 +22,9 @@
     height: 30px;
     width: 30px;
     border-radius: 10px;
+}
+
+.change-box input {
+    height: 30px;
+    width: 60px;
 }

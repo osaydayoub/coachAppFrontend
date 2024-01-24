@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../pages/LoginPage/LoginPage.css";
 import { useAuth } from "../../context/AuthContext";
+import { useData } from "../../context/DataContext";
 import axios from "axios";
 import loginImg from "../../assets/msaCoach.jpeg";
 //TODO handel is afunc for moving to signup page oe login... so do it
@@ -12,6 +13,7 @@ function Login({ handle }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useAuth();
+  const { setCurrentClient } = useData();
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,6 +32,8 @@ function Login({ handle }) {
       console.log(res.data);
 
       setCurrentUser(res.data);
+      console.log(res.data.client);
+      setCurrentClient(res.data.client);
       setIsLoggedIn(true);
       navigate("/");
     } catch (error) {

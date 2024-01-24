@@ -1,0 +1,12 @@
+.Homepage{
+    gap: 40px;
+    /* justify-content:start; */
+}
+.progress-container{
+display: flex;
+gap: 30px;
+}
+.progress{
+    height: 100px;
+    width: 100px;
+}

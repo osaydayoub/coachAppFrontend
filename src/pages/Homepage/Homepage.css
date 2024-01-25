@@ -1,12 +1,31 @@
 .Homepage{
-    gap: 40px;
-    /* justify-content:start; */
+    padding: 30px;
+    gap: 30px;
+    justify-content:start; 
+    align-items: start;
 }
-.progress-container{
+.Homepage .progress-container{
 display: flex;
 gap: 30px;
 }
 .progress{
     height: 100px;
     width: 100px;
+}
+.Homepage .daily-message-container{
+    width: 100%;
+}
+.homepage-message-container{
+       /* border: solid saddlebrown 3px;  */
+       display: flex;
+       flex-direction: column;
+       gap: 30px;
+       width: 50%;
+       align-items: center;
+}
+
+@media (max-width:750px) {
+    .homepage-message-container{
+        width: 100%;
+    }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import "./MealCard.css";
+import { useNavigate } from "react-router-dom";
 
 import img1 from "../../assets/images/1.jpg";
 import img2 from "../../assets/images/2.jpg";
@@ -19,14 +20,19 @@ function getTheImg(img) {
       break;
   }
 }
+
 function MealCard({ meal }) {
+  const navigate = useNavigate();
+  const handleSelect = (name) => {
+    navigate(`/meals/${name}`, { state: { name } });
+  };
   return (
     <div className="card-container">
       <img className="card-img" src={getTheImg(meal.img)} alt="img" />
       <h2>{meal.name}</h2>
 
       <div>
-        <button>Select!</button>
+        <button onClick={() => handleSelect(meal.name)}>Select!</button>
       </div>
     </div>
   );

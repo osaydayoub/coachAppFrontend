@@ -9,9 +9,10 @@ import TrackingPage from "./pages/TrackingPage/TrackingPage";
 import MealsPage from "./pages/MealsPage/MealsPage";
 import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/AuthContext";
+import Meal from "./components/Meal/Meal";
 
 function App() {
-  const { currentUser,isLoggedIn } = useAuth();
+  const { currentUser, isLoggedIn } = useAuth();
   return (
     <>
       {isLoggedIn && <Navbar />}
@@ -49,6 +50,10 @@ function App() {
           element={
             isLoggedIn ? <MealsPage /> : <Navigate replace to={"/login"} />
           }
+        />
+        <Route
+          path="/meals/:id"
+          element={isLoggedIn ? <Meal /> : <Navigate replace to={"/login"} />}
         />
       </Routes>
     </>

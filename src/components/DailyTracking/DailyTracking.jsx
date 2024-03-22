@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { isSameDay } from "../../utils/helpers.js";
 import "./DailyTracking.css";
 import { useData } from "../../context/DataContext.jsx";
@@ -10,6 +10,7 @@ function DailyTracking() {
   const [sleepHours, setSleepHours] = useState(0);
   const [dailyTracking, setDailyTracking] = useState(null);
   const { currentClient, addDailyTracking, getCurrentClient } = useData();
+  const inputRef = useRef(null);
   // const [client, setClient] = useState(currentClient);
 
   //for style use!
@@ -73,6 +74,11 @@ function DailyTracking() {
     // setSleepHours(0);
     // setWaterAmount(0);
   };
+  useEffect(() => {
+    if (addCalories) {
+      inputRef.current.focus();
+    }
+  }, [addCalories]);
 
   return (
     <div className="daily-tracking-container">
@@ -81,9 +87,16 @@ function DailyTracking() {
         <div className="change-container">
           <div className="change-box">
             <p>{`Calories: ${dailyTracking.calories}`}</p>
-            <button onClick={() => setAddCalories(true)}>+</button>
+            <button
+              onClick={() => {
+                setAddCalories(true);
+              }}
+            >
+              +
+            </button>
             {addCalories && (
               <input
+                ref={inputRef}
                 type="number"
                 id="calories-input"
                 value={calories}
@@ -120,7 +133,11 @@ function DailyTracking() {
               />
             )}
           </div>
-          <button className="update-btn" onClick={handleUpdateDailyTracking} disabled={adding}>
+          <button
+            className="update-btn"
+            onClick={handleUpdateDailyTracking}
+            disabled={adding}
+          >
             Update
           </button>
         </div>
@@ -130,5 +147,3 @@ function DailyTracking() {
 }
 
 export default DailyTracking;
-
-

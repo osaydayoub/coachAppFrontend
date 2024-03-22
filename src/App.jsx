@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       {isLoggedIn && <Navbar />}
-      {/* <Header /> */}
+
       <Routes>
         <Route
           exact

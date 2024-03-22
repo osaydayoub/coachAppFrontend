@@ -11,12 +11,17 @@ export function DataProvider({ children }) {
   const [clientsData, setClientsData] = useState(null);
   const [workoutsData, setWorkoutsData] = useState(null);
   const [currentClient, setCurrentClient] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    if (isLoggedIn) {
+      console.log("token Changed!!!");
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      }
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const getWorkouts = async () => {
     try {
@@ -121,6 +126,7 @@ export function DataProvider({ children }) {
     addPackage,
     createWorkout,
     addDailyTracking,
+    setIsLoggedIn,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

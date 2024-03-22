@@ -95,6 +95,19 @@ export function DataProvider({ children }) {
     }
   };
 
+  const deleteWorkout = async (id) => {
+    console.log("deleteWorkout");
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_LINK}/coach/workouts/${id}`
+      );
+      console.log(response);
+      await getWorkouts();
+    } catch (error) {
+      console.log("error in deleteWorkout");
+    }
+  };
+
   const addDailyTracking = async (id, trackingObj) => {
     try {
       const response = await axios.put(
@@ -125,6 +138,7 @@ export function DataProvider({ children }) {
     getWorkouts,
     addPackage,
     createWorkout,
+    deleteWorkout,
     addDailyTracking,
     setIsLoggedIn,
   };

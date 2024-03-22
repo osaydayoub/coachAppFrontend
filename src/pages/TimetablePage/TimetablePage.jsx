@@ -95,12 +95,14 @@ function TimetablePage() {
         {workoutsToDisply && (
           <>
             {workoutsToDisply.map((workout, index) => {
+              console.log(workout);
               return (
                 <Workout
                   key={index}
                   workout={workout}
                   isAdmin={currentUser.isAdmin}
                   index={index}
+                  id={workout._id}
                 />
               );
             })}

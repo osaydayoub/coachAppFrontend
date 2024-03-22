@@ -29,8 +29,8 @@ function Login({ handle }) {
       );
       // console.log(`${res.data.name} LoggedIn`);
 
-      console.log(res.data);
-
+      console.log(res.data.token);
+      localStorage.setItem("token", res.data.token);
       setCurrentUser(res.data);
       console.log(res.data.client);
       setCurrentClient(res.data.client);

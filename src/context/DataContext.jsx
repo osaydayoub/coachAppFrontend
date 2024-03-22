@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const DataContext = createContext();
@@ -11,6 +11,13 @@ export function DataProvider({ children }) {
   const [clientsData, setClientsData] = useState(null);
   const [workoutsData, setWorkoutsData] = useState(null);
   const [currentClient, setCurrentClient] = useState(null);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+  }, []);
+
   const getWorkouts = async () => {
     try {
       const response = await axios.get(
@@ -97,7 +104,7 @@ export function DataProvider({ children }) {
       console.log(response.data);
       // await getCurrentClient(id);
     } catch (error) {
-      console.log("error in addPackage");
+      console.log("error in addDailyTracking");
     }
   };
 

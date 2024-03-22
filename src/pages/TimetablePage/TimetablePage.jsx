@@ -67,6 +67,22 @@ function TimetablePage() {
 
   return (
     <div className="TimetablePage page">
+      <div className="calendar-message-container">
+        <Calendar value={value} onChange={onchange} tileContent={tileContent} />
+        {!currentUser.isAdmin && workouts && (
+          <div className="message-container">
+            <h3>{getFullDate(value)}</h3>
+            {getWorkout(new Date(value)) && (
+              <Workout
+                workout={getWorkout(new Date(value))}
+                isAdmin={currentUser.isAdmin}
+                index={1}
+              />
+            )}
+          </div>
+        )}
+      </div>
+
       <div className="workouts-container">
         {!currentUser.isAdmin && <h3>Workouts in the upcoming 7 days</h3>}
         {currentUser.isAdmin && (
@@ -89,22 +105,6 @@ function TimetablePage() {
               );
             })}
           </>
-        )}
-      </div>
-
-      <div className="calendar-message-container">
-        <Calendar value={value} onChange={onchange} tileContent={tileContent} />
-        {!currentUser.isAdmin && workouts && (
-          <div className="message-container">
-            <h3>{getFullDate(value)}</h3>
-            {getWorkout(new Date(value)) && (
-              <Workout
-                workout={getWorkout(new Date(value))}
-                isAdmin={currentUser.isAdmin}
-                index={1}
-              />
-            )}
-          </div>
         )}
       </div>
     </div>

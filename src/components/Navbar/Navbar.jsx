@@ -20,6 +20,7 @@ export default function Navbar() {
       setClientsData(null);
       setWorkoutsData(null);
       setCurrentClient(null);
+      localStorage.removeItem("token");
       navigate("./login");
     } catch {
       console.log("failed to log out");

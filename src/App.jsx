@@ -10,6 +10,7 @@ import MealsPage from "./pages/MealsPage/MealsPage";
 import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/AuthContext";
 import Meal from "./components/Meal/Meal";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const { currentUser, isLoggedIn } = useAuth();
@@ -56,6 +57,7 @@ function App() {
           element={isLoggedIn ? <Meal /> : <Navigate replace to={"/login"} />}
         />
       </Routes>
+      <Footer />
     </>
   );
 }

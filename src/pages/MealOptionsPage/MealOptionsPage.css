@@ -1,0 +1,44 @@
+.back-btn{
+    border: solid var(--color1) 3px;
+    display: inline-block;
+    width: 100px; 
+    height: 65px; 
+    background-color: var(--color4); 
+    color: var(--color1);
+    text-align: center;
+    line-height: 50px; 
+    cursor: pointer;
+    font-size: x-large; 
+    border-radius: 10px;
+}
+
+.add-meal-btn{
+    border: solid var(--color1) 3px;
+    display: inline-block;
+    width: 65px; 
+    height: 65px; 
+    border-radius: 50%;
+    background-color: var(--color3);
+    color: var(--color1);
+    text-align: center;
+    line-height: 50px; 
+    cursor: pointer;
+    font-size: x-large;
+}
+/* .meals-container{
+    border: solid 2px black;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: auto;
+} */
+/* overflow-x: scroll; */
+.meals-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    
+}

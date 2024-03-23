@@ -1,5 +1,5 @@
 .active{
-    background-color: var(--color2);
+    background-color: var(--color3);
 }
 nav{
     padding: 20px;
@@ -47,7 +47,7 @@ nav button {
 }
 nav ul li a:not(.active):hover {
     color: white;
-    background-color: var(--color3);
+    background-color: var(--color2);
     cursor: pointer;
 }
 

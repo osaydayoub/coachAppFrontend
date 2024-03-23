@@ -126,6 +126,18 @@ export function DataProvider({ children }) {
     }
   };
 
+  const getAllMealsByType = async (type) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_LINK}/coach/meals/${type}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error("error in getAllMealsByType");
+      // console.log("error in getAllMealsByType");
+    }
+  };
+
   const value = {
     currentClient,
     setCurrentClient,
@@ -141,6 +153,7 @@ export function DataProvider({ children }) {
     deleteWorkout,
     addDailyTracking,
     setIsLoggedIn,
+    getAllMealsByType,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

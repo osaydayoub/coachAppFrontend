@@ -3,11 +3,13 @@ import "./MealOptionsPage.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useData } from "../../context/DataContext.jsx";
 import Meal from "../../components/Meal/Meal.jsx";
+import AddMeal from "../../components/AddMeal/AddMeal.jsx";
 
 function MealOptionsPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const [mealOptions, setMealOptions] = useState(null);
+  const [addMealDisplay, setAddMealDisplay] = useState(false);
   const { getAllMealsByType } = useData();
 
   useEffect(() => {
@@ -36,7 +38,15 @@ function MealOptionsPage() {
       <p>{`You can choose from a variety of options for your ${location.state.name}, ensuring your meal fits your preferences and nutritional needs.`}</p>
       <div>
         <div>
-          <button className="add-meal-btn">+</button>
+          <button
+            className="add-meal-btn"
+            onClick={() => {
+              setAddMealDisplay(true);
+            }}
+          >
+            +
+          </button>
+          {addMealDisplay && <AddMeal handeleAddMealDisplay={setAddMealDisplay}/>}
         </div>
         {mealOptions && (
           <div className="meals-container">

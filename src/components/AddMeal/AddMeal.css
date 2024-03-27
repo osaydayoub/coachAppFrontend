@@ -1,8 +1,8 @@
 .addPackage-container{
     background-color: var(--color1);
     color: var(--color2);
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     align-items: center;

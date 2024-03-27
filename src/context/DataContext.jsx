@@ -133,8 +133,22 @@ export function DataProvider({ children }) {
       );
       return response.data;
     } catch (error) {
-      throw new Error("error in getAllMealsByType");
-      // console.log("error in getAllMealsByType");
+      // throw new Error("error in getAllMealsByType");
+      console.log("error in getAllMealsByType");
+    }
+  };
+
+  const addNewMeal = async (meal) => {
+    console.log("addNewMeal");
+    try {
+      console.log(meal);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_LINK}/coach/meals`,
+        meal
+      );
+      await getAllMealsByType(meal.type);
+    } catch (error) {
+      console.log("error in addNewMeal");
     }
   };
 
@@ -154,6 +168,7 @@ export function DataProvider({ children }) {
     addDailyTracking,
     setIsLoggedIn,
     getAllMealsByType,
+    addNewMeal,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

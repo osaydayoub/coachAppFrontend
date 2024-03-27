@@ -52,7 +52,7 @@ function App() {
           }
         />
         <Route
-          path="/meals/:id"
+          path="/meals/:type"
           element={
             isLoggedIn ? (
               <MealOptionsPage />

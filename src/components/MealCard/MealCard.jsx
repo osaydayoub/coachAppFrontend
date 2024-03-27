@@ -24,7 +24,7 @@ function getTheImg(img) {
 function MealCard({ meal }) {
   const navigate = useNavigate();
   const handleSelect = (name) => {
-    navigate(`/meals/${name}`, { state: { name } });
+    navigate(`/meals/${name.toLowerCase()}`);
   };
   return (
     <div className="card-container">

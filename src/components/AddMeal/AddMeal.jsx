@@ -6,6 +6,7 @@ function AddMeal({ handeleAddMealDisplay, type, handleMealsChanged }) {
   const [ingredientName, setIngredientName] = useState("");
   const [amount, setAmount] = useState(0);
   const [totalCalories, setTotalCalories] = useState(0);
+  const [displayNewMeal, setDisplayNewMeal] = useState(false);
 
   const unitOptions = [
     { value: "kg", label: "kg" },
@@ -36,6 +37,9 @@ function AddMeal({ handeleAddMealDisplay, type, handleMealsChanged }) {
     handeleAddMealDisplay(false);
   };
   const handleAddIngredient = (e) => {
+    if (ingredientsArray.length === 1) {
+      setDisplayNewMeal(true);
+    }
     e.preventDefault();
     const ingredient = {
       name: ingredientName,
@@ -48,18 +52,20 @@ function AddMeal({ handeleAddMealDisplay, type, handleMealsChanged }) {
     setSelectedUnit(unitOptions[0].value);
   };
   return (
-    <div className="addPackage-container">
+    <div className="addMeal-container">
       <button onClick={() => handeleAddMealDisplay(false)}>X</button>
       <h3>Add a Meal</h3>
-      <ul>
-        {ingredientsArray.map((ingredient, index) => {
-          return (
-            <li
-              key={index}
-            >{`${ingredient.name} - ${ingredient.amount} ${ingredient.unit}`}</li>
-          );
-        })}
-      </ul>
+      {displayNewMeal && (
+        <ul className="new-mael">
+          {ingredientsArray.map((ingredient, index) => {
+            return (
+              <li
+                key={index}
+              >{`${ingredient.name} - ${ingredient.amount} ${ingredient.unit}`}</li>
+            );
+          })}
+        </ul>
+      )}
 
       <form onSubmit={(e) => handleAddIngredient(e)}>
         <div>

@@ -29,7 +29,7 @@ function MealOptionsPage() {
     navigate(-1);
   }
   return (
-    <div className="page">
+    <div className="page MealOptionsPage">
       <button className="back-btn" onClick={handleBack}>
         Back
       </button>

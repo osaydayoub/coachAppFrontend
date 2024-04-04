@@ -32,7 +32,7 @@ function MealCard({ meal }) {
       <h2>{meal.name}</h2>
 
       <div>
-        <button onClick={() => handleSelect(meal.name)}>Select!</button>
+        <button className="meal-btn" onClick={() => handleSelect(meal.name)}>Select!</button>
       </div>
     </div>
   );

@@ -1,3 +1,6 @@
+.MealOptionsPage{
+    padding: 10px;
+}
 .back-btn{
     border: solid var(--color1) 3px;
     display: inline-block;
@@ -36,9 +39,23 @@
 } */
 /* overflow-x: scroll; */
 .meals-container{
-    display: flex;
+    /* display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 10px;
-    
+    gap: 10px; */
+    max-width: 600px;
+padding: 20px;
+display: flex;
+flex-flow: row wrap;
+justify-content: center;
+align-items: center;
+gap: calc(30px); 
 }
+
+/* width: 100%;
+padding: 20px;
+display: flex;
+flex-flow: row wrap;
+justify-content: center;
+align-items: center;
+gap: calc(30px); */

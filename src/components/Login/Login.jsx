@@ -27,12 +27,9 @@ function Login({ handle }) {
           password,
         }
       );
-      // console.log(`${res.data.name} LoggedIn`);
 
-      console.log(res.data.token);
       localStorage.setItem("token", res.data.token);
       setCurrentUser(res.data);
-      console.log(res.data.client);
       setCurrentClient(res.data.client);
       setIsLoggedIn(true);
       setIsLoggedInData(true);

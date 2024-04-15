@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const DataContext = createContext();
@@ -11,6 +11,18 @@ export function DataProvider({ children }) {
   const [clientsData, setClientsData] = useState(null);
   const [workoutsData, setWorkoutsData] = useState(null);
   const [currentClient, setCurrentClient] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log("token Changed!!!");
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      }
+    }
+  }, [isLoggedIn]);
+
   const getWorkouts = async () => {
     try {
       const response = await axios.get(
@@ -83,6 +95,19 @@ export function DataProvider({ children }) {
     }
   };
 
+  const deleteWorkout = async (id) => {
+    console.log("deleteWorkout");
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_LINK}/coach/workouts/${id}`
+      );
+      console.log(response);
+      await getWorkouts();
+    } catch (error) {
+      console.log("error in deleteWorkout");
+    }
+  };
+
   const addDailyTracking = async (id, trackingObj) => {
     try {
       const response = await axios.put(
@@ -97,7 +122,33 @@ export function DataProvider({ children }) {
       console.log(response.data);
       // await getCurrentClient(id);
     } catch (error) {
-      console.log("error in addPackage");
+      console.log("error in addDailyTracking");
+    }
+  };
+
+  const getAllMealsByType = async (type) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_LINK}/coach/meals/${type}`
+      );
+      return response.data;
+    } catch (error) {
+      // throw new Error("error in getAllMealsByType");
+      console.log("error in getAllMealsByType");
+    }
+  };
+
+  const addNewMeal = async (meal) => {
+    console.log("addNewMeal");
+    try {
+      console.log(meal);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_LINK}/coach/meals`,
+        meal
+      );
+      await getAllMealsByType(meal.type);
+    } catch (error) {
+      console.log("error in addNewMeal");
     }
   };
 
@@ -113,7 +164,11 @@ export function DataProvider({ children }) {
     getWorkouts,
     addPackage,
     createWorkout,
+    deleteWorkout,
     addDailyTracking,
+    setIsLoggedIn,
+    getAllMealsByType,
+    addNewMeal,
   };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

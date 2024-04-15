@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { isSameDay } from "../../utils/helpers.js";
 import "./DailyTracking.css";
 import { useData } from "../../context/DataContext.jsx";
+import SingleTracking from "../SingleTracking/SingleTracking.jsx";
 
 function DailyTracking() {
   const [adding, setAdding] = useState(false);
@@ -10,12 +11,6 @@ function DailyTracking() {
   const [sleepHours, setSleepHours] = useState(0);
   const [dailyTracking, setDailyTracking] = useState(null);
   const { currentClient, addDailyTracking, getCurrentClient } = useData();
-  // const [client, setClient] = useState(currentClient);
-
-  //for style use!
-  const [addCalories, setAddCalories] = useState(false);
-  const [addWaterAmount, setAddWaterAmount] = useState(false);
-  const [addSleepHours, setAddSleepHours] = useState(false);
 
   useState(() => {
     let track = currentClient.dailyTracking.find((track) => {
@@ -33,13 +28,6 @@ function DailyTracking() {
     }
     setDailyTracking(track);
   }, []);
-
-  // useState(() => {
-  //   const track = currentClient.dailyTracking.find((track) => {
-  //     return isSameDay(new Date(track.date), new Date());
-  //   });
-  //   setDailyTracking(track);
-  // }, [currentClient]);
 
   const handleUpdateDailyTracking = async (e) => {
     e.preventDefault();
@@ -69,9 +57,9 @@ function DailyTracking() {
       console.log("error in handleDailyTracking");
     }
     setAdding(false);
-    // setCalories(0);
-    // setSleepHours(0);
-    // setWaterAmount(0);
+    setCalories(0);
+    setSleepHours(0);
+    setWaterAmount(0);
   };
 
   return (
@@ -79,48 +67,29 @@ function DailyTracking() {
       <h3>add here!</h3>
       {dailyTracking && (
         <div className="change-container">
-          <div className="change-box">
-            <p>{`Calories: ${dailyTracking.calories}`}</p>
-            <button onClick={() => setAddCalories(true)}>+</button>
-            {addCalories && (
-              <input
-                type="number"
-                id="calories-input"
-                value={calories}
-                onChange={(e) => setCalories(e.target.value)}
-                required
-              />
-            )}
-          </div>
-
-          <div className="change-box">
-            <p>{`Water Amount: ${dailyTracking.waterAmount}`}</p>
-            <button onClick={() => setAddWaterAmount(true)}>+</button>
-            {addWaterAmount && (
-              <input
-                type="number"
-                id="water-input"
-                value={waterAmount}
-                onChange={(e) => setWaterAmount(e.target.value)}
-                required
-              />
-            )}
-          </div>
-
-          <div className="change-box">
-            <p>{`Sleep Hours: ${dailyTracking.sleepHours}`}</p>
-            <button onClick={() => setAddSleepHours(true)}>+</button>
-            {addSleepHours && (
-              <input
-                type="number"
-                id="sleep-hours"
-                value={sleepHours}
-                onChange={(e) => setSleepHours(e.target.value)}
-                required
-              />
-            )}
-          </div>
-          <button className="update-btn" onClick={handleUpdateDailyTracking} disabled={adding}>
+          <SingleTracking
+            trackingType={"Calories"}
+            dailyTracking={dailyTracking.calories}
+            trackingState={calories}
+            trackingStateHandler={setCalories}
+          />
+          <SingleTracking
+            trackingType={"Water Amount"}
+            dailyTracking={dailyTracking.waterAmount}
+            trackingState={waterAmount}
+            trackingStateHandler={setWaterAmount}
+          />
+          <SingleTracking
+            trackingType={"Sleep Hours"}
+            dailyTracking={dailyTracking.sleepHours}
+            trackingState={sleepHours}
+            trackingStateHandler={setSleepHours}
+          />
+          <button
+            className="update-btn"
+            onClick={handleUpdateDailyTracking}
+            disabled={adding}
+          >
             Update
           </button>
         </div>
@@ -130,5 +99,3 @@ function DailyTracking() {
 }
 
 export default DailyTracking;
-
-

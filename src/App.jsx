@@ -2,21 +2,21 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
-// import Header from "./components/Header/Header";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import TimetablePage from "./pages/TimetablePage/TimetablePage";
 import TrackingPage from "./pages/TrackingPage/TrackingPage";
 import MealsPage from "./pages/MealsPage/MealsPage";
 import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/AuthContext";
-import Meal from "./components/Meal/Meal";
+import Footer from "./components/Footer/Footer";
+import MealOptionsPage from "./pages/MealOptionsPage/MealOptionsPage";
 
 function App() {
   const { currentUser, isLoggedIn } = useAuth();
   return (
     <>
       {isLoggedIn && <Navbar />}
-      {/* <Header /> */}
+
       <Routes>
         <Route
           exact
@@ -52,10 +52,17 @@ function App() {
           }
         />
         <Route
-          path="/meals/:id"
-          element={isLoggedIn ? <Meal /> : <Navigate replace to={"/login"} />}
+          path="/meals/:type"
+          element={
+            isLoggedIn ? (
+              <MealOptionsPage />
+            ) : (
+              <Navigate replace to={"/login"} />
+            )
+          }
         />
       </Routes>
+      <Footer />
     </>
   );
 }

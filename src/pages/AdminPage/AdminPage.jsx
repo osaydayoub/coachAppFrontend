@@ -39,7 +39,8 @@ function AdminPage() {
       {clientsToDisply && (
         <div className="clients-list">
           {clientsToDisply.map((client, index) => {
-            return <Client key={index} client={client} index={index} />;
+            // return <Client key={index} client={client} index={index} />;
+            return <Client key={client.email} client={client} index={index} />;
           })}
         </div>
       )}

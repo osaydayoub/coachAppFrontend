@@ -9,17 +9,25 @@ import { GrLogout } from "react-icons/gr";
 import logo from "../../assets/images/logo.jpeg";
 export default function Navbar() {
   const { currentUser, setCurrentUser, setIsLoggedIn } = useAuth();
-  const { setClientsData, setWorkoutsData, setCurrentClient } = useData();
+  const {
+    setClientsData,
+    setWorkoutsData,
+    setCurrentClient,
+    setIsLoggedIn: setIsLoggedInData,
+  } = useData();
   const [menuOpen, setmenuOpen] = useState(false);
   const navigate = useNavigate();
   async function handleLogout() {
     try {
       // await logout();
+
       setCurrentUser(null);
       setIsLoggedIn(false);
       setClientsData(null);
       setWorkoutsData(null);
       setCurrentClient(null);
+      setIsLoggedInData(false);
+      localStorage.removeItem("token");
       navigate("./login");
     } catch {
       console.log("failed to log out");

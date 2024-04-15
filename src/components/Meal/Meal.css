@@ -1,0 +1,13 @@
+.meal-box{
+    padding: 30px;
+    border: solid var(--color1) 3px;
+    width: 250px; 
+    /* height: 65px;  */
+    border-radius: 5px;
+    background-color: var(--color3);
+    color: var(--color1);
+}
+
+.meal-box li{
+    padding: 5px;
+}

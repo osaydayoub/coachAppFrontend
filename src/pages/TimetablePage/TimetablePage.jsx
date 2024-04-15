@@ -67,31 +67,6 @@ function TimetablePage() {
 
   return (
     <div className="TimetablePage page">
-      <div className="workouts-container">
-        {!currentUser.isAdmin && <h3>Workouts in the upcoming 7 days</h3>}
-        {currentUser.isAdmin && (
-          <h3>
-            {isSameDay(new Date(value), new Date())
-              ? `Today's Workouts`
-              : `Workouts For ${getFullDate(value)}`}
-          </h3>
-        )}
-        {workoutsToDisply && (
-          <>
-            {workoutsToDisply.map((workout, index) => {
-              return (
-                <Workout
-                  key={index}
-                  workout={workout}
-                  isAdmin={currentUser.isAdmin}
-                  index={index}
-                />
-              );
-            })}
-          </>
-        )}
-      </div>
-
       <div className="calendar-message-container">
         <Calendar value={value} onChange={onchange} tileContent={tileContent} />
         {!currentUser.isAdmin && workouts && (
@@ -105,6 +80,33 @@ function TimetablePage() {
               />
             )}
           </div>
+        )}
+      </div>
+
+      <div className="workouts-container">
+        {!currentUser.isAdmin && <h3>Workouts in the upcoming 7 days</h3>}
+        {currentUser.isAdmin && (
+          <h3>
+            {isSameDay(new Date(value), new Date())
+              ? `Today's Workouts`
+              : `Workouts For ${getFullDate(value)}`}
+          </h3>
+        )}
+        {workoutsToDisply && (
+          <>
+            {workoutsToDisply.map((workout, index) => {
+              console.log(workout);
+              return (
+                <Workout
+                  key={index}
+                  workout={workout}
+                  isAdmin={currentUser.isAdmin}
+                  index={index}
+                  id={workout._id}
+                />
+              );
+            })}
+          </>
         )}
       </div>
     </div>

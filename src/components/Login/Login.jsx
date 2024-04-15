@@ -13,7 +13,7 @@ function Login({ handle }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useAuth();
-  const { setCurrentClient } = useData();
+  const { setCurrentClient, setIsLoggedIn: setIsLoggedInData } = useData();
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,12 +29,13 @@ function Login({ handle }) {
       );
       // console.log(`${res.data.name} LoggedIn`);
 
-      console.log(res.data);
-
+      console.log(res.data.token);
+      localStorage.setItem("token", res.data.token);
       setCurrentUser(res.data);
       console.log(res.data.client);
       setCurrentClient(res.data.client);
       setIsLoggedIn(true);
+      setIsLoggedInData(true);
       navigate("/");
     } catch (error) {
       console.log(error);

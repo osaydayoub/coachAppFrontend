@@ -14,4 +14,6 @@ To explore the app as a regular client, you can use the following demo credentia
 - **Email:** adam-msa@gmail.com
 - **Password:** 123456
 
+**Note:** Login may take a few moments if the server is asleep.
+## Website
 - **CoachApp Login:** [CoachApp Login](https://coach-msa.netlify.app/login)
